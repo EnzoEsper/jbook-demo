@@ -15,13 +15,18 @@ const App = () => {
     
   }
  
-  const onClick = () => {
+  const onClick = async () => {
     if (!ref.current) {
       console.log(`service not loaded yet`);
       return;
     }
 
-    console.log(ref.current);
+    const result = await ref.current.transform(input, {
+      loader: 'jsx',
+      target: 'es2015'
+    });
+
+    setCode(result.code);
   }
 
   useEffect(() => {
